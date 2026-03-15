@@ -87,7 +87,7 @@
       position: relative;
       overflow: hidden;
       display: flex; align-items: center; justify-content: center;
-      padding: 8px 0; /* opcional para aire */
+      padding: auto; /* opcional para aire */
       background: linear-gradient(120deg, rgba(124,92,255,.12), rgba(0,209,178,.12));
       border-top-left-radius: var(--radius, 18px);
       border-top-right-radius: var(--radius, 18px);
@@ -95,14 +95,14 @@
 
     .media-img{
       display:block;
-      width: 100%;
+      width: 50%;
       height: auto;             /* respeta proporción */
       max-height: 260px;        /* controla altura visible */
       object-fit: contain;      /* << nunca recorta */
       border-radius: 12px;      /* opcional */
     }
 
-    @media (max-width: 520px){
+    @media (max-width: 50%){
       .media-img{ max-height: 220px; }
     }
     .badge{
@@ -178,15 +178,15 @@
       <path d="M0 6 C-1 8, 1 10, 0 12" stroke="#bdb3ff" stroke-width="0.4" fill="none"/>
     </g>
   </defs>
-  <use href="#balloon" x="10" y="120"/>
-  <use href="#balloon" x="50" y="130" fill="#00d1b2"/>
+  <use href="#balloon" x="20" y="120"/>
+  <use href="#balloon" x="60" y="130" fill="#00d1b2"/>
   <use href="#balloon" x="90" y="125" fill="#ffd166"/>
 </svg>
 
 
   <div class="card" role="region" aria-label="Invitación">
     <div class="media">
-  <img class="media-img" src="WhatsApp Image 2026-03-14 at 7.15.17 PM.jpeg" alt="Imagen del evento">
+  <img class="media-img" src="WhatsApp Image 2026-03-14 at 7.15.17 PM.jpeg" alt="Imagen del evento" style="width: 50%;">
   <div class="badge" id="badgeEstado">Cuenta regresiva</div>
   <button class="switch" id="themeSwitch" aria-label="Cambiar tema">🌙/☀️</button>
 </div>
