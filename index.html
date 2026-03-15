@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>¡Cumple de Marisol! — Invitación</title>
+  <meta name="description" content="Te invito a celebrar conmigo. ¡No faltes!">
+  <!-- Open Graph para vista previa al compartir -->
+  <meta property="og:title" content="¡Cumple de Marisol! — Invitación">
+  <meta property="og:description" content="Te invito a celebrar conmigo. ¡No faltes!">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0f1220;
+      --card: #171a2b;
+      --text: #e7eaf6;
+      --muted: #aab1d6;
+      --accent: #7c5cff;
+      --accent-2: #00d1b2;
+      --shadow: 0 20px 50px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #f7f8fd;
+        --card: #ffffff;
+        --text: #1b1f3b;
+        --muted: #55607a;
+        --accent: #6a5cff;
+        --accent-2: #00b39f;
+        --shadow: 0 12px 30px rgba(0,0,0,.1);
+      }
+    }
+    [data-theme="light"]{
+      --bg: #f7f8fd; --card:#fff; --text:#1b1f3b; --muted:#55607a;
+      --accent:#6a5cff; --accent-2:#00b39f; --shadow:0 12px 30px rgba(0,0,0,.1);
+    }
+    [data-theme="dark"]{
+      --bg: #0f1220; --card:#171a2b; --text:#e7eaf6; --muted:#aab1d6;
+      --accent:#7c5cff; --accent-2:#00d1b2; --shadow:0 20px 50px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box }
+    html, body { height: 100% }
+    body{
+      margin:0;
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(124,92,255,.15), transparent 60%),
+                  radial-gradient(900px 500px at -10% 90%, rgba(0,209,178,.15), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      display:flex; align-items:center; justify-content:center; padding:24px;
+    }
+    .card{
+      width: min(880px, 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)) , var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .media{
+      position: relative; height: 700px; overflow: hidden;
+      background:
+          url("WhatsApp Image 2026-03-14 at 7.15.17 PM.jpeg") center/contain no-repeat;
+    }
+    .badge{
+      position:absolute; top:16px; left:16px;
+      background: rgba(0,0,0,.45); color:#fff; padding:8px 12px; border-radius:999px; font-size:.85rem;
+      backdrop-filter: blur(6px);
+    }
+    .content{ padding: 28px; display:grid; gap:16px }
+    .title{ font-size: clamp(1.4rem, 2.5vw, 2rem); margin:0; font-weight:700; letter-spacing:.2px }
+    .subtitle{ margin:0; color: var(--muted); font-weight: 400 }
+    .grid{
+      display:grid; gap:16px; grid-template-columns: repeat(4, 1fr);
+    }
+    .pill{
+      background: rgba(124,92,255,.12);
+      border: 1px solid rgba(124,92,255,.35);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 14px 10px; text-align:center;
+      font-variant-numeric: tabular-nums;
+    }
+    .pill small{ display:block; color: var(--muted); margin-top:6px; letter-spacing:.5px }
+    .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:4px }
+    .btn{
+      appearance:none; border:none; cursor:pointer;
+      padding:12px 16px; border-radius:12px; font-weight:600;
+      color:white; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 20px rgba(124,92,255,.25), 0 6px 14px rgba(0,209,178,.18);
+      transition: transform .15s ease, filter .15s ease;
+      text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05) }
+    .btn.secondary{
+      background: transparent; color: var(--text);
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: none;
+    }
+    .row{ display:grid; gap:10px }
+    .meta{ color: var(--muted) }
+    .switch{
+      position:absolute; right:16px; top:16px;
+      background: rgba(0,0,0,.45); color:#fff; padding:8px 12px; border-radius:999px; font-size:.85rem; cursor:pointer;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Responsive */
+    @media (max-width: 720px){
+      .media{ height: 180px }
+      .grid{ grid-template-columns: repeat(2, 1fr) }
+      .actions{ flex-direction: column }
+      .btn{ width:100%; justify-content:center }
+    }
+
+    /* Confeti */
+    .confetti {
+      position: fixed; inset:0; pointer-events:none; overflow:hidden;
+    }
+    .confetti span {
+      position:absolute; width:10px; height:16px; opacity:0; transform: translateY(-20px) rotate(0);
+      animation: fall 2.8s ease-in forwards;
+    }
+    @keyframes fall{
+      to { transform: translateY(120vh) rotate(720deg); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" role="region" aria-label="Invitación">
+    <div class="media">
+      <div class="badge" id="badgeEstado">Cuenta regresiva</div>
+      <button class="switch" id="themeSwitch" aria-label="Cambiar tema">🌙/☀️</button>
+    </div>
+
+    <div class="content">
+      <h1 class="title" id="titulo">¡Cumple de Marisol!</h1>
+      <p class="subtitle" id="mensaje">Estás invitad@ a celebrar conmigo. ¡No faltes! 🎊</p>
+
+      <div class="row">
+        <div class="meta" id="detalleFecha">🗓️ Sábado 21 de Marzo de 2026, 15:00 (CDMX)</div>
+        <div class="meta" id="detalleLugar">📍 San Juan Bautista, Col. Sa Juanito, Irapuato, Gto</div>
+      </div>
+
+      <!-- Contenedor de la cuenta -->
+      <div class="grid" aria-live="polite" aria-atomic="true">
+        <div class="pill"><span id="d">00</span><small>DÍAS</small></div>
+        <div class="pill"><span id="h">00</span><small>HORAS</small></div>
+        <div class="pill"><span id="m">00</span><small>MIN</small></div>
+        <div class="pill"><span id="s">00</span><small>SEG</small></div>
+      </div>
+
+      <div class="actions">
+        <a class="btn" id="btnMaps" href="#" target="_blank" rel="noopener">🗺️ Ver ubicación</a>
+        <a class="btn secondary" id="btnICS" href="#" download="evento.ics">🗓️ Agregar al calendario</a>
+        <a class="btn secondary" id="btnWhats" href="#" target="_blank" rel="noopener">📲 Compartir por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+  <script>
+    // 🔧 CONFIGURA TU EVENTO AQUÍ
+    const config = {
+      titulo: "¡Cumple de Marisol!",
+      mensaje: "Estás invitad@ a celebrar conmigo. ¡No faltes! 🎊",
+      lugar: "San Juan Bautista, Col. San Juanito, Irapuato, Gto",
+      // Link de ubicación (puede ser Google Maps)
+      mapsUrl: "https://www.google.com/maps?q=San+Juan+Bautista,+San+Juanito,+36687+Irapuato,+Gto.&ftid=0x842c800d1e1e56ed:0x3366e01bc1bc7f8a&entry=gps&lucs=,94242616,94224825,94227247,94227248,47071704,47069508,94218641,94203019,47084304,94208458,94208447&g_ep=CAISDTYuMTMzLjEuODU2ODAYACDXggMqYyw5NDI0MjYxNiw5NDIyNDgyNSw5NDIyNzI0Nyw5NDIyNzI0OCw0NzA3MTcwNCw0NzA2OTUwOCw5NDIxODY0MSw5NDIwMzAxOSw0NzA4NDMwNCw5NDIwODQ1OCw5NDIwODQ0N0ICTVg%3D&g_st=iw",
+      // Fecha/hora local del evento (zona: America/Mexico_City)
+      // Formato: YYYY-MM-DDTHH:MM:SS
+      fechaLocal: "2026-03-21T21:00:00",
+      zona: "America/Mexico_City",
+      // Imagen OG opcional para compartir (también puedes cambiar la de <meta>)
+      ogImage: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=1200&auto=format&fit=crop",
+    };
+
+    // ========================= LÓGICA =========================
+    const $ = (sel) => document.querySelector(sel);
+    const d = (n) => String(n).padStart(2, "0");
+
+    // Escribe texto base
+    $("#titulo").textContent = config.titulo;
+    $("#mensaje").textContent = config.mensaje;
+    $("#btnMaps").href = config.mapsUrl;
+
+    // Intl: formatea fecha en español de MX
+    try {
+      const dt = new Date(new Date(config.fechaLocal + "Z").toLocaleString("en-US", { timeZone: config.zona }));
+      // Mostrar fecha sin zona horaria (sin GMT-6)
+      const opts = { weekday:"long", year:"numeric", month:"long", day:"numeric", hour:"2-digit", minute:"2-digit", hour12:false, timeZone: config.zona };
+      let fmt = new Intl.DateTimeFormat("es-MX", opts).format(dt);
+      // Eliminar cualquier mención de zona horaria (por si acaso)
+      fmt = fmt.replace(/\s*GMT[+-]\d{1,2}/i, "");
+      $("#detalleFecha").textContent = "🗓️ " + (fmt.charAt(0).toUpperCase()+fmt.slice(1));
+    } catch(e){
+      $("#detalleFecha").textContent = "🗓️ " + config.fechaLocal + " (" + config.zona + ")";
+    }
+    $("#detalleLugar").textContent = "📍 " + config.lugar;
+
+    // Cuenta regresiva
+    const target = () => {
+      // Obtener timestamp del evento en la zona indicada
+      const asLocale = new Date(new Date(config.fechaLocal + "Z").toLocaleString("en-US", { timeZone: config.zona }));
+      return asLocale.getTime();
+    };
+
+    let done = false;
+    function tick(){
+      const now = Date.now();
+      const diff = target() - now;
+
+      if (diff <= 0 && !done) {
+        done = true;
+        $("#badgeEstado").textContent = "¡Es ahora!";
+        launchConfetti();
+        updateCounters(0,0,0,0);
+        return;
+      }
+      const sec = Math.max(0, Math.floor(diff / 1000));
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400) / 3600);
+      const mins = Math.floor((sec % 3600) / 60);
+      const secs = sec % 60;
+
+      updateCounters(days, hours, mins, secs);
+      if (!done) requestAnimationFrame(() => setTimeout(tick, 250)); // ~4Hz
+    }
+
+    function updateCounters(days, hours, mins, secs){
+      $("#d").textContent = d(days);
+      $("#h").textContent = d(hours);
+      $("#m").textContent = d(mins);
+      $("#s").textContent = d(secs);
+    }
+    tick();
+
+    // Confeti simple (sin librerías)
+    function launchConfetti(){
+      const c = $("#confetti");
+      const colors = ["#7c5cff","#00d1b2","#ffd166","#ef476f","#06d6a0","#118ab2"];
+      const count = 180;
+      for (let i=0;i<count;i++){
+        const piece = document.createElement("span");
+        piece.style.left = (Math.random()*100) + "vw";
+        piece.style.top = (-10 - Math.random()*20) + "px";
+        piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+        piece.style.transform = `translateY(-20px) rotate(${Math.random()*360}deg)`;
+        piece.style.animationDelay = (Math.random()*0.7) + "s";
+        piece.style.animationDuration = (2 + Math.random()*1.6) + "s";
+        c.appendChild(piece);
+        setTimeout(()=> piece.remove(), 4000);
+      }
+    }
+
+    // Botón .ics (Agregar a calendario)
+    function buildICS(){
+      // Convertir a formato ICS (UTC con DTSTART/DTEND)
+      const start = new Date(new Date(config.fechaLocal + "Z").toLocaleString("en-US", { timeZone: config.zona }));
+      const end = new Date(start.getTime() + 2*60*60*1000); // +2h por defecto
+      const toICS = dt => dt.toISOString().replace(/[-:]/g,'').split('.')[0] + "Z";
+      const ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitacion Web//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:${crypto.randomUUID()}@invitacion
+DTSTAMP:${toICS(new Date())}
+DTSTART:${toICS(start)}
+DTEND:${toICS(end)}
+SUMMARY:${escapeICS(config.titulo)}
+DESCRIPTION:${escapeICS(config.mensaje + " | " + config.lugar)}
+LOCATION:${escapeICS(config.lugar)}
+END:VEVENT
+END:VCALENDAR`;
+      const blob = new Blob([ics], {type:"text/calendar;charset=utf-8"});
+      $("#btnICS").href = URL.createObjectURL(blob);
+      $("#btnICS").download = (config.titulo || "evento") + ".ics";
+    }
+    function escapeICS(s){ return String(s).replace(/([,;])/g,"\\$1").replace(/\n/g,"\\n"); }
+    buildICS();
+
+    // Botón WhatsApp
+    function buildWhats(){
+      const dt = new Date(new Date(config.fechaLocal + "Z").toLocaleString("en-US", { timeZone: config.zona }));
+      const opts = { dateStyle:"full", timeStyle:"short", hour12:false, timeZone: config.zona };
+      const nice = new Intl.DateTimeFormat("es-MX", opts).format(dt);
+      const text = `¡${config.titulo}!\n${config.mensaje}\n📍 ${config.lugar}\n🗓️ ${nice}\n\nDetalles: ${location.href}`;
+      const url = "https://wa.me/?text=" + encodeURIComponent(text);
+      $("#btnWhats").href = url;
+    }
+    buildWhats();
+
+    // Tema claro/oscuro
+    (function initTheme(){
+      const saved = localStorage.getItem("theme");
+      if (saved === "light" || saved === "dark") document.documentElement.setAttribute("data-theme", saved);
+      $("#themeSwitch").addEventListener("click", () => {
+        const current = document.documentElement.getAttribute("data-theme");
+        const next = current === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      });
+    })();
+  </script>
+</body>
+</html>
