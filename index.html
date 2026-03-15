@@ -14,6 +14,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
   <style>
+.bg-balloons{
+  position: fixed; inset:0; z-index:-1; pointer-events:none;
+  opacity: .60;
+  animation: none;
+}
+.bg-balloons use{
+  animation: float 10s ease-in-out infinite;
+}
+.bg-balloons use:nth-child(2){ animation-duration: 20s; animation-delay: -7s }
+.bg-balloons use:nth-child(3){ animation-duration: 18s; animation-delay: -3s }
+
+@keyframes float{
+  0%   { transform: translateY(0) }
+  50%  { transform: translateY(-18vh) }
+  100% { transform: translateY(0) }
+}
+
     :root{
       --bg: #0f1220;
       --card: #171a2b;
@@ -63,23 +80,31 @@
       overflow: hidden;
       border: 1px solid rgba(255,255,255,.06);
     }
+
+   /* contenedor sin fondo de imagen */
     .media{
-      position: relative; height: 700px; overflow: hidden;
-      background:
-          url("WhatsApp Image 2026-03-14 at 7.15.17 PM.jpeg") center/contain no-repeat;
-    
-
-    }
-    
-    @media (max-width: 480px){
-      .media{
-        height: 220px;                  /* un poquito más bajita si quieres */
-        background-position: center top;/* empieza arriba para que “quepa” mejor */
-        background-size: contain;       /* ⬅️ clave: NO recorta */
-        background-repeat: no-repeat;
-      }
+      
+      position: relative;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px 0; /* opcional para aire */
+      background: linear-gradient(120deg, rgba(124,92,255,.12), rgba(0,209,178,.12));
+      border-top-left-radius: var(--radius, 18px);
+      border-top-right-radius: var(--radius, 18px);
     }
 
+    .media-img{
+      display:block;
+      width: 100%;
+      height: auto;             /* respeta proporción */
+      max-height: 260px;        /* controla altura visible */
+      object-fit: contain;      /* << nunca recorta */
+      border-radius: 12px;      /* opcional */
+    }
+
+    @media (max-width: 520px){
+      .media-img{ max-height: 220px; }
+    }
     .badge{
       position:absolute; top:16px; left:16px;
       background: rgba(0,0,0,.45); color:#fff; padding:8px 12px; border-radius:999px; font-size:.85rem;
@@ -146,11 +171,25 @@
 </head>
 <body>
 
+  <svg class="bg-balloons" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <g id="balloon">
+      <ellipse cx="0" cy="0" rx="5" ry="7" fill="#7c5cff"/>
+      <path d="M0 6 C-1 8, 1 10, 0 12" stroke="#bdb3ff" stroke-width="0.4" fill="none"/>
+    </g>
+  </defs>
+  <use href="#balloon" x="10" y="120"/>
+  <use href="#balloon" x="50" y="130" fill="#00d1b2"/>
+  <use href="#balloon" x="90" y="125" fill="#ffd166"/>
+</svg>
+
+
   <div class="card" role="region" aria-label="Invitación">
     <div class="media">
-      <div class="badge" id="badgeEstado">Cuenta regresiva</div>
-      <button class="switch" id="themeSwitch" aria-label="Cambiar tema">🌙/☀️</button>
-    </div>
+  <img class="media-img" src="WhatsApp Image 2026-03-14 at 7.15.17 PM.jpeg" alt="Imagen del evento">
+  <div class="badge" id="badgeEstado">Cuenta regresiva</div>
+  <button class="switch" id="themeSwitch" aria-label="Cambiar tema">🌙/☀️</button>
+</div>
 
     <div class="content">
       <h1 class="title" id="titulo">¡Cumple de Marisol!</h1>
