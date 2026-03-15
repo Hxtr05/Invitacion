@@ -81,29 +81,40 @@
       border: 1px solid rgba(255,255,255,.06);
     }
 
-   /* contenedor sin fondo de imagen */
+   
     .media{
-      
       position: relative;
-      overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      padding: auto; /* opcional para aire */
+      /* Mantén visible para que nada se corte por alto interno */
+      overflow: visible;
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      padding: 8px 0; /* aire opcional */
       background: linear-gradient(120deg, rgba(124,92,255,.12), rgba(0,209,178,.12));
       border-top-left-radius: var(--radius, 18px);
       border-top-right-radius: var(--radius, 18px);
+      height: auto; /* nunca fijar altura */
     }
 
+    /* imagen sin recortes y adaptada al viewport */
     .media-img{
       display:block;
-      width: 50%;
-      height: auto;             /* respeta proporción */
-      max-height: 150px;        /* controla altura visible */
-      object-fit: contain;      /* << nunca recorta */
-      border-radius: 12px;      /* opcional */
+      max-width: 100%;
+      height: auto;            /* mantiene proporción */
+      /* ⚠️ truco clave: limita su altura al viewport para que quepa completa en móvil */
+      max-height: min(360px, 45vh);
+      object-fit: contain;     /* no recorta */
+      object-position: center; /* centrada */
+      border-radius: 12px;     /* opcional */
+      image-orientation: from-image; /* respeta orientación EXIF (fotos de WhatsApp) */
     }
 
+    /* En pantallas muy pequeñas usa un límite algo menor para que entre completa */
     @media (max-width: 520px){
-    body{ padding-top: 36px; }
+      .media-img{
+        max-height: min(320px, 42vh);
+      }
+      
 }
 
     .badge{
@@ -185,7 +196,7 @@
   <use href="#balloon" x="90" y="125" fill="#ffd166"/>
 </svg>
 
-  <div style="height: 60px;"></div>
+  <div style="height: 100px;"></div>
   <div class="card" role="region" aria-label="Invitación">
     <div class="media">
   <img class="media-img" src="WhatsApp Image 2026-03-14 at 7.15.17 PM.jpeg" alt="Imagen del evento" style="width: 50%;">
