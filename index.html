@@ -67,7 +67,19 @@
       position: relative; height: 700px; overflow: hidden;
       background:
           url("WhatsApp Image 2026-03-14 at 7.15.17 PM.jpeg") center/contain no-repeat;
+    
+
     }
+    
+    @media (max-width: 480px){
+      .media{
+        height: 220px;                  /* un poquito más bajita si quieres */
+        background-position: center top;/* empieza arriba para que “quepa” mejor */
+        background-size: contain;       /* ⬅️ clave: NO recorta */
+        background-repeat: no-repeat;
+      }
+    }
+
     .badge{
       position:absolute; top:16px; left:16px;
       background: rgba(0,0,0,.45); color:#fff; padding:8px 12px; border-radius:999px; font-size:.85rem;
