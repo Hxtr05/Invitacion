@@ -112,8 +112,8 @@
     /* En pantallas muy pequeñas usa un límite algo menor para que entre completa */
     @media (max-width: 520px){
       .media-img{
-        max-height: min(140px, 38vh);
-        .card{ margin-top: 12px; }
+        max-height: min(280px, 40vh);
+        .card{ margin-top: 24px; }
       }
 
 }
@@ -197,12 +197,17 @@
   <use href="#balloon" x="90" y="125" fill="#ffd166"/>
 </svg>
 
-  <div style="height: 100px;"></div>
+ 
   <div class="card" role="region" aria-label="Invitación">
-    <div class="media">
-  <img class="media-img" src="WhatsApp Image 2026-03-14 at 7.15.17 PM.jpeg" alt="Imagen del evento" style="width: 50%;">
-  <div class="badge" id="badgeEstado">Cuenta regresiva</div>
-  <button class="switch" id="themeSwitch" aria-label="Cambiar tema">🌙/☀️</button>
+  <div class="content">
+    <!-- título, fecha, contador, botones -->
+  </div>
+
+  <div class="media">
+    <img class="media-img" src="WhatsApp%20Image%202026-03-14%20at%207.15.17%20PM.jpeg" alt="Imagen del evento">
+    <div class="badge" id="badgeEstado">Cuenta regresiva</div>
+    <button class="switch" id="themeSwitch" aria-label="Cambiar tema">🌙/☀️</button>
+  </div>
 </div>
       
     <div class="content">
