@@ -71,7 +71,7 @@
                   var(--bg);
       color: var(--text);
       display:flex; align-items:center; justify-content:center; padding:24px;
-      padding-top: 48px; /* Más espacio arriba para móviles */
+      padding-top: 180px; /* Aún más espacio arriba */
     }
     .card{
       width: min(880px, 100%);
@@ -151,7 +151,7 @@
 
     /* Responsive */
     @media (max-width: 720px){
-      body { padding-top: 64px; } /* Aún más espacio arriba en móviles */
+      body { padding-top: 260px; } /* Aún más espacio arriba en móviles */
       .media{ height: 180px }
       .grid{ grid-template-columns: repeat(2, 1fr) }
       .actions{ flex-direction: column }
