@@ -71,6 +71,7 @@
                   var(--bg);
       color: var(--text);
       display:flex; align-items:center; justify-content:center; padding:24px;
+      padding-top: 48px; /* Más espacio arriba para móviles */
     }
     .card{
       width: min(880px, 100%);
@@ -79,51 +80,32 @@
       box-shadow: var(--shadow);
       overflow: hidden;
       border: 1px solid rgba(255,255,255,.06);
-      display: flex !important; flex-direction: column;
-      gap: 0.5rem;
     }
 
-    
-    .content{ order: 1 !important; width: 100%; }
-    .media  { order: 2 !important; width: 100%; margin-top: 16px; }
-
-   
+   /* contenedor sin fondo de imagen */
     .media{
+      
       position: relative;
-      /* Mantén visible para que nada se corte por alto interno */
-      overflow: visible;
-      display: flex; 
-      align-items: center; 
-      justify-content: center;
-      padding: 8px 0; /* aire opcional */
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px 0; /* opcional para aire */
       background: linear-gradient(120deg, rgba(124,92,255,.12), rgba(0,209,178,.12));
       border-top-left-radius: var(--radius, 18px);
       border-top-right-radius: var(--radius, 18px);
-      height: auto; /* nunca fijar altura */
     }
 
-    /* imagen sin recortes y adaptada al viewport */
     .media-img{
       display:block;
-      max-width: 100%;
-      height: auto;            /* mantiene proporción */
-      /* ⚠️ truco clave: limita su altura al viewport para que quepa completa en móvil */
-      max-height: min(360px, 45vh);
-      object-fit: contain;     /* no recorta */
-      object-position: center; /* centrada */
-      border-radius: 12px;     /* opcional */
-      image-orientation: from-image; /* respeta orientación EXIF (fotos de WhatsApp) */
+      width: 100%;
+      height: auto;             /* respeta proporción */
+      max-height: 260px;        /* controla altura visible */
+      object-fit: contain;      /* << nunca recorta */
+      border-radius: 12px;      /* opcional */
     }
 
-    /* En pantallas muy pequeñas usa un límite algo menor para que entre completa */
     @media (max-width: 520px){
-      .media-img{
-        max-height: min(280px, 40vh);
-        .card{ margin-top: 24px; }
-      }
-
-}
-
+      .media-img{ max-height: 220px; }
+    }
     .badge{
       position:absolute; top:16px; left:16px;
       background: rgba(0,0,0,.45); color:#fff; padding:8px 12px; border-radius:999px; font-size:.85rem;
@@ -169,6 +151,7 @@
 
     /* Responsive */
     @media (max-width: 720px){
+      body { padding-top: 64px; } /* Aún más espacio arriba en móviles */
       .media{ height: 180px }
       .grid{ grid-template-columns: repeat(2, 1fr) }
       .actions{ flex-direction: column }
@@ -189,7 +172,6 @@
   </style>
 </head>
 <body>
- 
 
   <svg class="bg-balloons" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
   <defs>
@@ -199,18 +181,18 @@
     </g>
   </defs>
   <use href="#balloon" x="20" y="120"/>
-  <use href="#balloon" x="60" y="130" fill="#00d1b2"/>
-  <use href="#balloon" x="90" y="125" fill="#ffd166"/>
+  <use href="#balloon" x="50" y="130" fill="#00d1b2"/>
+  <use href="#balloon" x="80" y="125" fill="#ffd166"/>
 </svg>
 
- 
+
   <div class="card" role="region" aria-label="Invitación">
     <div class="media">
-  <img class="media-img" src="WhatsApp Image 2026-03-14 at 7.15.17 PM.jpeg" alt="Imagen del evento" style="width: 50%;">
+  <img class="media-img" src="WhatsApp Image 2026-03-14 at 7.15.17 PM.jpeg" alt="Imagen del evento">
   <div class="badge" id="badgeEstado">Cuenta regresiva</div>
   <button class="switch" id="themeSwitch" aria-label="Cambiar tema">🌙/☀️</button>
 </div>
-      
+
     <div class="content">
       <h1 class="title" id="titulo">¡Cumple de Marisol!</h1>
       <p class="subtitle" id="mensaje">Estás invitad@ a celebrar conmigo. ¡No faltes! 🎊</p>
