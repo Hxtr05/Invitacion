@@ -79,7 +79,13 @@
       box-shadow: var(--shadow);
       overflow: hidden;
       border: 1px solid rgba(255,255,255,.06);
+      display: flex !important; flex-direction: column;
+      gap: 0.5rem;
     }
+
+    
+    .content{ order: 1 !important; width: 100%; }
+    .media  { order: 2 !important; width: 100%; margin-top: 16px; }
 
    
     .media{
@@ -199,15 +205,10 @@
 
  
   <div class="card" role="region" aria-label="Invitación">
-  <div class="content">
-    <!-- título, fecha, contador, botones -->
-  </div>
-
-  <div class="media">
-    <img class="media-img" src="WhatsApp%20Image%202026-03-14%20at%207.15.17%20PM.jpeg" alt="Imagen del evento">
-    <div class="badge" id="badgeEstado">Cuenta regresiva</div>
-    <button class="switch" id="themeSwitch" aria-label="Cambiar tema">🌙/☀️</button>
-  </div>
+    <div class="media">
+  <img class="media-img" src="WhatsApp Image 2026-03-14 at 7.15.17 PM.jpeg" alt="Imagen del evento" style="width: 50%;">
+  <div class="badge" id="badgeEstado">Cuenta regresiva</div>
+  <button class="switch" id="themeSwitch" aria-label="Cambiar tema">🌙/☀️</button>
 </div>
       
     <div class="content">
