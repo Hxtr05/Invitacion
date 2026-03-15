@@ -14,21 +14,32 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
   <style>
-.bg-balloons{
-  position: fixed; inset:0; z-index:-1; pointer-events:none;
-  opacity: .60;
-  animation: none;
-}
-.bg-balloons use{
-  animation: float 10s ease-in-out infinite;
-}
-.bg-balloons use:nth-child(2){ animation-duration: 20s; animation-delay: -7s }
-.bg-balloons use:nth-child(3){ animation-duration: 18s; animation-delay: -3s }
+      .tap-balloons{ position:absolute; inset:0; pointer-events:none; overflow:hidden }
+      .tap-balloons span{
+      position:absolute; width:10px; height:14px; border-radius:50%;
+      background: #7c5cff; opacity:.9; transform: translate(-50%, -50%); 
+      animation: rise 2.4s ease-in forwards;
+      box-shadow: inset 0 -3px 6px rgba(0,0,0,.2);
+    }
+    @keyframes rise{ 
+      0% { transform: translate(-50%, -50%) scale(1); }
+      100% { transform: translate(-50%, -180px) scale(1.2); opacity: 0; }
+    }
+    .bg-balloons{
+      position: fixed; inset:0; z-index:-1; pointer-events:none;
+      opacity: .60;
+      animation: none;
+    }
+    .bg-balloons use{
+      animation: float 10s ease-in-out infinite;
+    }
+    .bg-balloons use:nth-child(2){ animation-duration: 20s; animation-delay: -7s }
+    .bg-balloons use:nth-child(3){ animation-duration: 18s; animation-delay: -3s }
 
-@keyframes float{
-  0%   { transform: translateY(0) }
-  50%  { transform: translateY(-18vh) }
-  100% { transform: translateY(0) }
+    @keyframes float{
+      0%   { transform: translateY(0) }
+      50%  { transform: translateY(-18vh) }
+      100% { transform: translateY(0) }
 }
 
     :root{
@@ -189,8 +200,9 @@
   <div class="card" role="region" aria-label="Invitación">
     <div class="media">
   <img class="media-img" src="WhatsApp Image 2026-03-14 at 7.15.17 PM.jpeg" alt="Imagen del evento">
-  <div class="badge" id="badgeEstado">Cuenta regresiva</div>
+  <div class="badge" id="badgeEstado">Tap Tap</div>
   <button class="switch" id="themeSwitch" aria-label="Cambiar tema">🌙/☀️</button>
+  <div class="tap-balloons" id="tapBalloons" aria-hidden="true"></div>
 </div>
 
     <div class="content">
@@ -365,6 +377,28 @@ END:VCALENDAR`;
         localStorage.setItem("theme", next);
       });
     })();
+    // Globitos al tocar la imagen
+(function balloonsOnTap(){
+  const zone = document.querySelector(".media");
+  const layer = document.getElementById("tapBalloons");
+  if(!zone || !layer) return;
+  const colors = ["#7c5cff","#00d1b2","#ffd166","#ef476f","#06d6a0"];
+  function spawn(x, y){
+    for(let i=0;i<5;i++){
+      const b = document.createElement("span");
+      b.style.left = x + (Math.random()*40-20) + "px";
+      b.style.top  = y + (Math.random()*20-10) + "px";
+      b.style.background = colors[Math.floor(Math.random()*colors.length)];
+      b.style.animationDuration = (2 + Math.random()*1.2) + "s";
+      layer.appendChild(b);
+      setTimeout(()=> b.remove(), 2600);
+    }
+  }
+  zone.addEventListener("click", (e)=>{
+    const rect = zone.getBoundingClientRect();
+    spawn(e.clientX - rect.left, e.clientY - rect.top);
+  });
+})();
   </script>
 </body>
 </html>
